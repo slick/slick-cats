@@ -1,13 +1,29 @@
+import _root_.io.github.nafg.mergify.dsl._
+import _root_.io.github.nafg.mergify.Condition
+
+
 name := "slick-cats-parent"
 
 sourcesInBase := false
 publish / skip := true
 
-val commonSettings = Seq(
+WriteMergify.mergifyScalaStewardConditions := {
+  val jobsCondition =
+    WriteMergify.workflowJobCheckNames(githubWorkflowGeneratedCI.value.filter(_.id == "build"))
+      .map(Attr.CheckSuccess :== _)
+      .reduce[Condition](_ && _)
+  val authorsCondition =
+    Seq("scala-steward", "renovate")
+      .map(Attr.Author :== _)
+      .reduce[Condition](_ || _)
+  Seq(authorsCondition && jobsCondition)
+}
+
+inThisBuild(Seq(
   organization := "com.rms.miu",
 
   scalaVersion := "2.12.12",
-  crossScalaVersions := Seq("2.12.12","2.13.4"),
+  crossScalaVersions := Seq("2.12.12", "2.13.4"),
 
   scalacOptions ++= Seq(
     "-deprecation",
@@ -22,13 +38,12 @@ val commonSettings = Seq(
     "-Ywarn-numeric-widen",
     "-Ywarn-value-discard"
   )
-)
+))
 
 val catsVersion = "2.3.1"
 
 lazy val slickcats =
   project.in(file("slick-cats"))
-    .settings(commonSettings)
     .settings(
       name := "slick-cats",
       description := "Cats instances for Slick's DBIO",
@@ -46,10 +61,9 @@ lazy val docs =
   project.in(file("slick-cats-docs"))
     .dependsOn(slickcats)
     .enablePlugins(MdocPlugin)
-    .settings(commonSettings)
     .settings(
       name := "slick-cats-docs",
-      scalacOptions in mdoc --= Seq("-Ywarn-unused-import", "-Xlint"),
+      mdoc / scalacOptions --= Seq("-Ywarn-unused-import", "-Xlint"),
       publish / skip := true
     )
 
