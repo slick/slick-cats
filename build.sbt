@@ -51,7 +51,7 @@ lazy val slickcats =
         "com.typesafe.slick" %% "slick" % "3.3.3",
         "org.typelevel" %% "cats-core" % catsVersion,
         "org.typelevel" %% "cats-laws" % catsVersion % Test,
-        "org.typelevel" %% "discipline-scalatest" % "2.1.1" % Test,
+        "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test,
         "org.scalatest" %% "scalatest" % "3.2.3" % Test,
         "org.scalacheck" %% "scalacheck" % "1.15.2" % Test
       )
