@@ -13,7 +13,7 @@ WriteMergify.mergifyScalaStewardConditions := {
       .map(Attr.CheckSuccess :== _)
       .reduce[Condition](_ && _)
   val authorsCondition =
-    Seq("scala-steward", "renovate")
+    Seq("scala-steward", "renovate[bot]")
       .map(Attr.Author :== _)
       .reduce[Condition](_ || _)
   Seq(authorsCondition && jobsCondition)
@@ -48,10 +48,10 @@ lazy val slickcats =
       name := "slick-cats",
       description := "Cats instances for Slick's DBIO",
       libraryDependencies ++= Seq(
-        "com.typesafe.slick" %% "slick" % "3.3.3",
+        "com.typesafe.slick" %% "slick" % "3.4.0",
         "org.typelevel" %% "cats-core" % catsVersion,
         "org.typelevel" %% "cats-laws" % catsVersion % Test,
-        "org.typelevel" %% "discipline-scalatest" % "2.1.1" % Test,
+        "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test,
         "org.scalatest" %% "scalatest" % "3.2.3" % Test,
         "org.scalacheck" %% "scalacheck" % "1.16.0" % Test
       )
