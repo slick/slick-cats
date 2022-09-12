@@ -1,4 +1,3 @@
-addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.3")
 addSbtPlugin("org.scalameta" % "sbt-mdoc" % "2.3.3")
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.13")
 addSbtPlugin("com.jsuereth" % "sbt-pgp" % "2.0.0")
