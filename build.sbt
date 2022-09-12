@@ -13,7 +13,7 @@ WriteMergify.mergifyScalaStewardConditions := {
       .map(Attr.CheckSuccess :== _)
       .reduce[Condition](_ && _)
   val authorsCondition =
-    Seq("scala-steward", "renovate")
+    Seq("scala-steward", "renovate[bot]")
       .map(Attr.Author :== _)
       .reduce[Condition](_ || _)
   Seq(authorsCondition && jobsCondition)
