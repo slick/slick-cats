@@ -23,7 +23,7 @@ inThisBuild(Seq(
   organization := "com.rms.miu",
 
   scalaVersion := "2.12.12",
-  crossScalaVersions := Seq("2.12.12", "2.13.4"),
+  crossScalaVersions := Seq("2.12.12", "2.13.8"),
 
   scalacOptions ++= Seq(
     "-deprecation",
