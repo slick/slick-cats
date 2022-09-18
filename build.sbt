@@ -22,8 +22,8 @@ WriteMergify.mergifyScalaStewardConditions := {
 inThisBuild(Seq(
   organization := "com.rms.miu",
 
-  scalaVersion := "2.12.12",
-  crossScalaVersions := Seq("2.12.12", "2.13.4"),
+  scalaVersion := "2.12.17",
+  crossScalaVersions := Seq("2.12.17", "2.13.4"),
 
   scalacOptions ++= Seq(
     "-deprecation",
