@@ -7,23 +7,17 @@ name := "slick-cats-parent"
 sourcesInBase := false
 publish / skip := true
 
-WriteMergify.mergifyScalaStewardConditions := {
-  val jobsCondition =
-    WriteMergify.workflowJobCheckNames(githubWorkflowGeneratedCI.value.filter(_.id == "build"))
-      .map(Attr.CheckSuccess :== _)
-      .reduce[Condition](_ && _)
-  val authorsCondition =
-    Seq("scala-steward", "renovate[bot]")
-      .map(Attr.Author :== _)
-      .reduce[Condition](_ || _)
-  Seq(authorsCondition && jobsCondition)
-}
+mergifyExtraConditions := Seq(
+  (Attr.Author :== "scala-steward") ||
+    (Attr.Author :== "slick-scala-steward[bot]") ||
+    (Attr.Author :== "renovate[bot]")
+)
 
 inThisBuild(Seq(
   organization := "com.rms.miu",
 
   scalaVersion := "2.12.17",
-  crossScalaVersions := Seq("2.12.17", "2.13.4"),
+  crossScalaVersions := Seq("2.12.17", "2.13.10"),
 
   scalacOptions ++= Seq(
     "-deprecation",
