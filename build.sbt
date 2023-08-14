@@ -34,7 +34,7 @@ inThisBuild(Seq(
   )
 ))
 
-val catsVersion = "2.9.0"
+val catsVersion = "2.10.0"
 
 lazy val slickcats =
   project.in(file("slick-cats"))
