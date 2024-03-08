@@ -42,7 +42,7 @@ lazy val slickcats =
       name := "slick-cats",
       description := "Cats instances for Slick's DBIO",
       libraryDependencies ++= Seq(
-        "com.typesafe.slick" %% "slick" % "3.4.1",
+        "com.typesafe.slick" %% "slick" % "3.5.0",
         "org.typelevel" %% "cats-core" % catsVersion,
         "org.typelevel" %% "cats-laws" % catsVersion % Test,
         "org.typelevel" %% "discipline-scalatest" % "2.2.0" % Test,
