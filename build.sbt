@@ -16,7 +16,7 @@ mergifyExtraConditions := Seq(
 inThisBuild(Seq(
   organization := "com.rms.miu",
 
-  scalaVersion := "2.12.17",
+  scalaVersion := "2.13.16",
   crossScalaVersions := Seq("2.12.17", "2.13.10"),
 
   scalacOptions ++= Seq(
