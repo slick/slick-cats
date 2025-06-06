@@ -10,7 +10,7 @@ pull_request_rules:
           - author=slick-scala-steward[bot]
           - author=renovate[bot]
       - check-success=Build and Test (ubuntu-latest, 2.12.17, zulu@8)
-      - check-success=Build and Test (ubuntu-latest, 2.13.10, zulu@8)
+      - check-success=Build and Test (ubuntu-latest, 2.13.16, zulu@8)
     actions:
         queue:
             name: default
