@@ -49,7 +49,7 @@ jobs:
         run: sbt '++ ${{ matrix.scala }}; test'
 
       - name: Compress target directories
-        run: tar cf targets.tar target slick-cats/target slick-cats-docs/target project/target
+        run: tar chf targets.tar target slick-cats/target slick-cats-docs/target project/target
 
       - name: Upload target directories
         uses: actions/upload-artifact@v7
