@@ -29,6 +29,20 @@ inThisBuild(Seq(
     Developer(id = "frosforever", name = "Yosef Fertel", email = "", url("https://github.com/frosforever"))
   ),
 
+  githubWorkflowTargetTags ++= Seq("v*"),
+  githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
+  githubWorkflowPublish := Seq(
+    WorkflowStep.Sbt(
+      List("ci-release"),
+      env = Map(
+        "PGP_PASSPHRASE" -> "${{ secrets.PGP_PASSPHRASE }}",
+        "PGP_SECRET" -> "${{ secrets.PGP_SECRET }}",
+        "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
+        "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
+      )
+    )
+  ),
+
   scalaVersion := "2.12.17",
   crossScalaVersions := Seq("2.12.17", "2.13.18"),
 
@@ -73,11 +87,3 @@ lazy val docs =
       mdoc / scalacOptions --= Seq("-Ywarn-unused-import", "-Xlint"),
       publish / skip := true
     )
-
-publishMavenStyle := true
-publishTo := Some(
-  if (isSnapshot.value)
-    Opts.resolver.sonatypeSnapshots
-  else
-    Opts.resolver.sonatypeStaging
-)
