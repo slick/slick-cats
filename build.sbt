@@ -15,6 +15,19 @@ mergifyExtraConditions := Seq(
 
 inThisBuild(Seq(
   organization := "com.rms.miu",
+  licenses := List("BSD New" -> url("https://opensource.org/licenses/BSD-3-Clause")),
+  homepage := Some(url("https://github.com/rmsone/slick-cats")),
+  scmInfo := Some(
+    ScmInfo(
+      url("https://github.com/rmsone/slick-cats"),
+      "scm:git@github.com:rmsone/slick-cats.git"
+    )
+  ),
+  developers := List(
+    Developer(id = "23will", name = "William Duncan", email = "", url("https://github.com/23will")),
+    Developer(id = "tvaroh", name = "Alexander Semenov", email = "", url("https://github.com/tvaroh")),
+    Developer(id = "frosforever", name = "Yosef Fertel", email = "", url("https://github.com/frosforever"))
+  ),
 
   scalaVersion := "2.12.17",
   crossScalaVersions := Seq("2.12.17", "2.13.18"),
@@ -60,20 +73,6 @@ lazy val docs =
       mdoc / scalacOptions --= Seq("-Ywarn-unused-import", "-Xlint"),
       publish / skip := true
     )
-
-licenses += ("BSD New", url("https://opensource.org/licenses/BSD-3-Clause"))
-homepage := Some(url("https://github.com/rmsone/slick-cats"))
-scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/rmsone/slick-cats"),
-    "scm:git@github.com:rmsone/slick-cats.git"
-  )
-)
-developers := List(
-  Developer(id = "23will", name = "William Duncan", email = "", url("https://github.com/23will")),
-  Developer(id = "tvaroh", name = "Alexander Semenov", email = "", url("https://github.com/tvaroh")),
-  Developer(id = "frosforever", name = "Yosef Fertel", email = "", url("https://github.com/frosforever"))
-)
 
 publishMavenStyle := true
 publishTo := Some(
