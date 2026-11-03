@@ -29,6 +29,7 @@ inThisBuild(Seq(
     Developer(id = "frosforever", name = "Yosef Fertel", email = "", url("https://github.com/frosforever"))
   ),
 
+  githubWorkflowScalaVersions := githubWorkflowScalaVersions.value.map(_.replaceFirst("\\d+$", "x")),
   githubWorkflowTargetTags ++= Seq("v*"),
   githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
   githubWorkflowPublish := Seq(
