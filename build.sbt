@@ -46,6 +46,7 @@ inThisBuild(Seq(
 
   scalaVersion := "2.12.17",
   crossScalaVersions := Seq("2.12.17", "2.13.18"),
+  githubWorkflowJavaVersions := Seq(JavaSpec.zulu("17")),
 
   scalacOptions ++= Seq(
     "-deprecation",
