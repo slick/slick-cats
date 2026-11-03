@@ -15,9 +15,36 @@ mergifyExtraConditions := Seq(
 
 inThisBuild(Seq(
   organization := "com.rms.miu",
+  licenses := List("BSD New" -> url("https://opensource.org/licenses/BSD-3-Clause")),
+  homepage := Some(url("https://github.com/rmsone/slick-cats")),
+  scmInfo := Some(
+    ScmInfo(
+      url("https://github.com/rmsone/slick-cats"),
+      "scm:git@github.com:rmsone/slick-cats.git"
+    )
+  ),
+  developers := List(
+    Developer(id = "23will", name = "William Duncan", email = "", url("https://github.com/23will")),
+    Developer(id = "tvaroh", name = "Alexander Semenov", email = "", url("https://github.com/tvaroh")),
+    Developer(id = "frosforever", name = "Yosef Fertel", email = "", url("https://github.com/frosforever"))
+  ),
+
+  githubWorkflowTargetTags ++= Seq("v*"),
+  githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
+  githubWorkflowPublish := Seq(
+    WorkflowStep.Sbt(
+      List("ci-release"),
+      env = Map(
+        "PGP_PASSPHRASE" -> "${{ secrets.PGP_PASSPHRASE }}",
+        "PGP_SECRET" -> "${{ secrets.PGP_SECRET }}",
+        "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
+        "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
+      )
+    )
+  ),
 
   scalaVersion := "2.12.17",
-  crossScalaVersions := Seq("2.12.17", "2.13.10"),
+  crossScalaVersions := Seq("2.12.17", "2.13.18"),
 
   scalacOptions ++= Seq(
     "-deprecation",
@@ -60,25 +87,3 @@ lazy val docs =
       mdoc / scalacOptions --= Seq("-Ywarn-unused-import", "-Xlint"),
       publish / skip := true
     )
-
-licenses += ("BSD New", url("https://opensource.org/licenses/BSD-3-Clause"))
-homepage := Some(url("https://github.com/rmsone/slick-cats"))
-scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/rmsone/slick-cats"),
-    "scm:git@github.com:rmsone/slick-cats.git"
-  )
-)
-developers := List(
-  Developer(id = "23will", name = "William Duncan", email = "", url("https://github.com/23will")),
-  Developer(id = "tvaroh", name = "Alexander Semenov", email = "", url("https://github.com/tvaroh")),
-  Developer(id = "frosforever", name = "Yosef Fertel", email = "", url("https://github.com/frosforever"))
-)
-
-publishMavenStyle := true
-publishTo := Some(
-  if (isSnapshot.value)
-    Opts.resolver.sonatypeSnapshots
-  else
-    Opts.resolver.sonatypeStaging
-)
