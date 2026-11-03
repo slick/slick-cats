@@ -44,8 +44,8 @@ inThisBuild(Seq(
     )
   ),
 
-  scalaVersion := "2.12.18",
-  crossScalaVersions := Seq("2.12.18", "2.13.18"),
+  scalaVersion := "2.12.21",
+  crossScalaVersions := Seq("2.12.21", "2.13.18"),
 
   scalacOptions ++= Seq(
     "-deprecation",
