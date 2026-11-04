@@ -62,7 +62,7 @@ inThisBuild(Seq(
   )
 ))
 
-val catsVersion = "2.12.0"
+val catsVersion = "2.13.0"
 
 lazy val slickcats =
   project.in(file("slick-cats"))
@@ -75,7 +75,9 @@ lazy val slickcats =
         "org.typelevel" %% "cats-laws" % catsVersion % Test,
         "org.typelevel" %% "discipline-scalatest" % "2.3.0" % Test,
         "org.scalatest" %% "scalatest" % "3.2.20" % Test,
-        "org.scalacheck" %% "scalacheck" % "1.20.0" % Test
+        "org.scalacheck" %% "scalacheck" % "1.20.0" % Test,
+        // cats-kernel declares this provided; Scala 2 needs it to compile a class that inherits cats instances with @unused parameters
+        "org.typelevel" %% "scalac-compat-annotation" % "0.1.4" % Test
       )
     )
 
