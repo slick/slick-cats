@@ -77,7 +77,7 @@ lazy val slickcats =
         "org.scalatest" %% "scalatest" % "3.2.20" % Test,
         "org.scalacheck" %% "scalacheck" % "1.20.0" % Test,
         // cats-kernel declares this provided; Scala 2 needs it to compile a class that inherits cats instances with @unused parameters
-        "org.typelevel" %% "scalac-compat-annotation" % "0.1.4" % Test
+        "org.typelevel" %% "scalac-compat-annotation" % "0.1.5" % Test
       )
     )
 
