@@ -92,13 +92,13 @@ private[slickcats] class DBIOGroup[A](implicit A: Group[A], ec: ExecutionContext
 }
 
 private[slickcats] sealed trait DBIOInstances0 extends DBIOInstances1 {
-  def dbioComonad(atMost: FiniteDuration, db: BasicBackend#DatabaseDef)(implicit ec: ExecutionContext): Comonad[DBIO] =
+  def dbioComonad(atMost: FiniteDuration, db: BasicBackend#BasicDatabaseDef)(implicit ec: ExecutionContext): Comonad[DBIO] =
     new DBIOCoflatMap with Comonad[DBIO] {
       def extract[A](x: DBIO[A]): A =
         Await.result(db.run(x), atMost)
     }
 
-  def dbioOrder[A: Order](atMost: FiniteDuration, db: BasicBackend#DatabaseDef)(implicit ec: ExecutionContext): Order[DBIO[A]] =
+  def dbioOrder[A: Order](atMost: FiniteDuration, db: BasicBackend#BasicDatabaseDef)(implicit ec: ExecutionContext): Order[DBIO[A]] =
     new Order[DBIO[A]] {
       def compare(x: DBIO[A], y: DBIO[A]): Int =
         Await.result(db.run((x zip y).map { case (a, b) => a compare b }), atMost)
@@ -106,7 +106,7 @@ private[slickcats] sealed trait DBIOInstances0 extends DBIOInstances1 {
 }
 
 private[slickcats] sealed trait DBIOInstances1 extends DBIOInstances2 {
-  def dbioPartialOrder[A: PartialOrder](atMost: FiniteDuration, db: BasicBackend#DatabaseDef)(implicit ec: ExecutionContext): PartialOrder[DBIO[A]] =
+  def dbioPartialOrder[A: PartialOrder](atMost: FiniteDuration, db: BasicBackend#BasicDatabaseDef)(implicit ec: ExecutionContext): PartialOrder[DBIO[A]] =
     new PartialOrder[DBIO[A]] {
       def partialCompare(x: DBIO[A], y: DBIO[A]): Double =
         Await.result(db.run((x zip y).map { case (a, b) => a partialCompare b }), atMost)
@@ -114,7 +114,7 @@ private[slickcats] sealed trait DBIOInstances1 extends DBIOInstances2 {
 }
 
 private[slickcats] sealed trait DBIOInstances2 {
-  def dbioEq[A: Eq](atMost: FiniteDuration, db: BasicBackend#DatabaseDef)(implicit ec: ExecutionContext): Eq[DBIO[A]] =
+  def dbioEq[A: Eq](atMost: FiniteDuration, db: BasicBackend#BasicDatabaseDef)(implicit ec: ExecutionContext): Eq[DBIO[A]] =
     new Eq[DBIO[A]] {
       def eqv(x: DBIO[A], y: DBIO[A]): Boolean =
         Await.result(db.run((x zip y).map { case (a, b) => a === b }), atMost)
