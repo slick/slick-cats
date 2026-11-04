@@ -44,7 +44,7 @@ inThisBuild(Seq(
     )
   ),
 
-  scalaVersion := "2.12.21",
+  scalaVersion := "3.10.0",
   crossScalaVersions := Seq("2.12.21", "2.13.18"),
 
   scalacOptions ++= Seq(
